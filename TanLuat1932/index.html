@@ -87,12 +87,6 @@ See https://github.com/adobe-type-tools/cmap-resources
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    opacity: 0.3;
-    transition: opacity 0.4s ease;
-  }
-
-  #music-overlay:hover {
-    opacity: 1;
   }
 
   #color-stripe {
@@ -100,11 +94,11 @@ See https://github.com/adobe-type-tools/cmap-resources
     width: 100%;
     background: linear-gradient(
       to bottom,
-      #ffd700 0%,        /* Vàng */
+      #ffd700 0%,
       #fff8dc 33.33%,
-      #007BFF 33.34%,    /* Xanh dương */
+      #007BFF 33.34%,
       #007BFF 66.66%,
-      #FF6347 66.67%,    /* Đỏ cam */
+      #FF6347 66.67%,
       #FF6347 100%
     );
   }
@@ -130,6 +124,16 @@ See https://github.com/adobe-type-tools/cmap-resources
   #play-music-btn:hover {
     background-color: #5c007a;
   }
+
+  /* Thanh trượt âm lượng */
+  #volume-slider {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 120px;
+    z-index: 10000;
+    display: none;
+  }
 </style>
 
 <!-- KHUNG NHẠC -->
@@ -138,35 +142,37 @@ See https://github.com/adobe-type-tools/cmap-resources
   <button id="play-music-btn">▶ Phát nhạc</button>
 </div>
 
+<!-- THANH TRƯỢT ÂM LƯỢNG -->
+<input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1">
+
 <!-- ÂM THANH -->
 <audio id="bgm" loop>
-  <source src="assets/nhacnen.mp3" type="audio/mpeg">
+  <source src="../assets/nhacnen.mp3" type="audio/mpeg">
   Trình duyệt của bạn không hỗ trợ audio.
 </audio>
 
 <script>
   const btn = document.getElementById('play-music-btn');
-  const audio = document.getElementById('bgm');
   const overlay = document.getElementById('music-overlay');
-  let isPlaying = false;
+  const audio = document.getElementById('bgm');
+  const volumeSlider = document.getElementById('volume-slider');
 
-  btn.addEventListener('click', function () {
-    if (!isPlaying) {
-      audio.play().then(() => {
-        btn.textContent = '⏸ Dừng nhạc';
-        isPlaying = true;
-      }).catch(err => {
-        console.log("Không thể phát nhạc:", err);
-      });
-    } else {
-      audio.pause();
-      audio.currentTime = 0;
-      btn.textContent = '▶ Phát nhạc';
-      isPlaying = false;
-    }
+  btn.addEventListener('click', () => {
+    audio.play().then(() => {
+      overlay.style.display = 'none';
+      volumeSlider.style.display = 'block';
+      document.body.style.overflow = 'auto';
+    }).catch(err => {
+      console.log("Không thể phát nhạc:", err);
+    });
+  });
+
+  volumeSlider.addEventListener('input', () => {
+    audio.volume = volumeSlider.value;
   });
 </script>
 
 </body>
+
 
 </html>
