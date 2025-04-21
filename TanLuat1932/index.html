@@ -125,11 +125,12 @@ See https://github.com/adobe-type-tools/cmap-resources
     background-color: #5c007a;
   }
 
-  /* Thanh trượt âm lượng */
+  /* Thanh trượt âm lượng - căn giữa phía trên */
   #volume-slider {
     position: fixed;
     top: 10px;
-    right: 10px;
+    left: 50%;
+    transform: translateX(-50%);
     width: 120px;
     z-index: 10000;
     display: none;
@@ -143,11 +144,11 @@ See https://github.com/adobe-type-tools/cmap-resources
 </div>
 
 <!-- THANH TRƯỢT ÂM LƯỢNG -->
-<input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1">
+<input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.5">
 
 <!-- ÂM THANH -->
 <audio id="bgm" loop>
-  <source src="../assets/nhacnen.mp3" type="audio/mpeg">
+  <source src="assets/nhacnen.mp3" type="audio/mpeg">
   Trình duyệt của bạn không hỗ trợ audio.
 </audio>
 
@@ -158,6 +159,7 @@ See https://github.com/adobe-type-tools/cmap-resources
   const volumeSlider = document.getElementById('volume-slider');
 
   btn.addEventListener('click', () => {
+    audio.volume = 0.5; // Âm lượng mặc định 50%
     audio.play().then(() => {
       overlay.style.display = 'none';
       volumeSlider.style.display = 'block';
@@ -173,6 +175,7 @@ See https://github.com/adobe-type-tools/cmap-resources
 </script>
 
 </body>
+
 
 
 </html>
