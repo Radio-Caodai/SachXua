@@ -88,9 +88,15 @@ See https://github.com/adobe-type-tools/cmap-resources
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    opacity: 0.3; /* Mặc định mờ */
+    transition: opacity 0.4s ease;
   }
 
-  /* 3 màu chia đều */
+  /* Khi rê chuột vào thì hiện rõ */
+  #music-overlay:hover {
+    opacity: 1;
+  }
+
   #color-stripe {
     height: 100%;
     width: 100%;
@@ -105,14 +111,13 @@ See https://github.com/adobe-type-tools/cmap-resources
     );
   }
 
-  /* NÚT NHẤN */
   #play-music-btn {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 8px 26px;
-    background-color: #800080; /* Màu tím */
+    background-color: #800080;
     color: white;
     border: none;
     border-radius: 6px;
@@ -132,24 +137,29 @@ See https://github.com/adobe-type-tools/cmap-resources
 <div id="music-overlay">
   <div id="color-stripe"></div>
   <button id="play-music-btn">▶ Phát nhạc</button>
+  <audio id="background-music" src="nhacnen.mp3" loop></audio>
 </div>
 
-<audio id="bgm" loop>
-  <source src="../assets/nhacnen.mp3" type="audio/mpeg">
-  Trình duyệt của bạn không hỗ trợ audio.
-</audio>
 
 <script>
-  document.getElementById('play-music-btn').addEventListener('click', function () {
-    const audio = document.getElementById('bgm');
-    audio.play();
+  const btn = document.getElementById("play-music-btn");
+  const music = document.getElementById("background-music");
+  let isPlaying = false;
 
-    // Ẩn khung nhạc
-    const overlay = document.getElementById('music-overlay');
-    overlay.style.display = 'none';
+  // Giảm âm lượng mặc định
+  music.volume = 0.5;
 
-    // Mở rộng sách toàn màn hình
-    document.body.style.overflow = 'auto';
+  btn.addEventListener("click", () => {
+    if (!isPlaying) {
+      music.play();
+      btn.textContent = "⏸ Dừng nhạc";
+      isPlaying = true;
+    } else {
+      music.pause();
+      music.currentTime = 0;
+      btn.textContent = "▶ Phát nhạc";
+      isPlaying = false;
+    }
   });
 </script>
 
