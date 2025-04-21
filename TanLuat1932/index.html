@@ -66,12 +66,45 @@ See https://github.com/adobe-type-tools/cmap-resources
 </head>
 <body>
 	
-  <button onclick="document.getElementById('bgm').play()">▶ Bật nhạc nền</button>
+    background-color: #fff8dc; /* Vàng nhạt */
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+  }
 
-  <audio id="bgm" loop>
-    <source src="../assets/nhacnen.mp3" type="audio/mpeg">
-    Trình duyệt không hỗ trợ audio.
-  </audio>
+  #play-music-btn {
+    padding: 20px 40px;
+    background-color: #007BFF; /* Xanh dương */
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease;
+  }
+
+  #play-music-btn:hover {
+    background-color: #0056b3;
+  }
+</style>
+
+<button id="play-music-btn">▶ Bật nhạc nền</button>
+
+<audio id="bgm" loop>
+  <source src="../assets/nhacnen.mp3" type="audio/mpeg">
+  Trình duyệt của bạn không hỗ trợ audio.
+</audio>
+
+<script>
+  document.getElementById('play-music-btn').addEventListener('click', function() {
+    document.getElementById('bgm').play();
+    this.style.display = 'none'; // Ẩn nút sau khi nhạc phát
+  });
+</script>
 
 </body>
 </html>
