@@ -64,6 +64,25 @@ See https://github.com/adobe-type-tools/cmap-resources
 		});
 	</script>
 </head>
+
+<style>
+  #watermark {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #888888; /* màu xám tro */
+    font-size: 14px;
+    font-style: italic;
+    opacity: 0.3; /* mờ nhẹ như watermark */
+    z-index: 9998;
+    pointer-events: none; /* không ảnh hưởng khi click chuột */
+    user-select: none; /* không cho bôi chọn */
+  }
+</style>
+
+<div id="watermark">Radio Truyện Sử Cao Đài</div>
+	
 <body>
 
 <style>
