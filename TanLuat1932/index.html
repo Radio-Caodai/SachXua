@@ -69,44 +69,69 @@ See https://github.com/adobe-type-tools/cmap-resources
 <style>
   body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    padding: 0;
+    overflow: hidden;
   }
 
-  #music-container {
+  /* VÙNG NỀN 3 MÀU */
+  #music-overlay {
     position: fixed;
-    top: 20px; /* khoảng cách từ mép trên */
+    top: 10px;
     left: 50%;
     transform: translateX(-50%);
     width: 10cm;
-    height: 2cm;
-    background-color: #fff8dc; /* Vàng nhạt */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    height: 15cm;
     z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
   }
 
+  /* 3 màu chia đều */
+  #color-stripe {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(
+      to bottom,
+      #fff8dc 0%,        /* Vàng */
+      #fff8dc 33.33%,
+      #007BFF 33.34%,    /* Xanh dương */
+      #007BFF 66.66%,
+      #FF6347 66.67%,    /* Đỏ cam */
+      #FF6347 100%
+    );
+  }
+
+  /* NÚT NHẤN */
   #play-music-btn {
-    padding: 10px 20px;
-    background-color: #007BFF; /* Xanh dương */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 18px 36px;
+    background-color: #800080; /* Màu tím */
     color: white;
     border: none;
-    border-radius: 8px;
-    font-size: 16px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: bold;
     cursor: pointer;
+    z-index: 10000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     transition: background-color 0.3s ease;
   }
 
   #play-music-btn:hover {
-    background-color: #0056b3;
+    background-color: #5c007a;
   }
 </style>
 
-
-<div id="music-container">
-  <button id="play-music-btn">▶ Bật nhạc nền</button>
+<div id="music-overlay">
+  <div id="color-stripe"></div>
+  <button id="play-music-btn">▶ Phát nhạc</button>
 </div>
 
 <audio id="bgm" loop>
@@ -114,12 +139,17 @@ See https://github.com/adobe-type-tools/cmap-resources
   Trình duyệt của bạn không hỗ trợ audio.
 </audio>
 
-
 <script>
   document.getElementById('play-music-btn').addEventListener('click', function () {
     const audio = document.getElementById('bgm');
     audio.play();
-    document.getElementById('music-container').style.display = 'none'; // Ẩn khung sau khi bấm
+
+    // Ẩn khung nhạc
+    const overlay = document.getElementById('music-overlay');
+    overlay.style.display = 'none';
+
+    // Mở rộng sách toàn màn hình
+    document.body.style.overflow = 'auto';
   });
 </script>
 
