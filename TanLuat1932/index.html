@@ -73,7 +73,6 @@ See https://github.com/adobe-type-tools/cmap-resources
     overflow: hidden;
   }
 
-  /* KHUNG NHẠC */
   #music-overlay {
     position: fixed;
     top: 10px;
@@ -92,12 +91,10 @@ See https://github.com/adobe-type-tools/cmap-resources
     transition: opacity 0.4s ease;
   }
 
-  /* Khi rê chuột vào thì hiện rõ */
   #music-overlay:hover {
     opacity: 1;
   }
 
-  /* Dải nền 3 màu */
   #color-stripe {
     height: 100%;
     width: 100%;
@@ -112,7 +109,6 @@ See https://github.com/adobe-type-tools/cmap-resources
     );
   }
 
-  /* Nút nhấn */
   #play-music-btn {
     position: absolute;
     top: 50%;
@@ -140,26 +136,32 @@ See https://github.com/adobe-type-tools/cmap-resources
 <div id="music-overlay">
   <div id="color-stripe"></div>
   <button id="play-music-btn">▶ Phát nhạc</button>
-  <audio id="background-music" src="assets/nhacnen.mp3" loop></audio>
 </div>
 
+<!-- ÂM THANH -->
+<audio id="bgm" loop>
+  <source src="assets/nhacnen.mp3" type="audio/mpeg">
+  Trình duyệt của bạn không hỗ trợ audio.
+</audio>
+
 <script>
-  const btn = document.getElementById("play-music-btn");
-  const music = document.getElementById("background-music");
+  const btn = document.getElementById('play-music-btn');
+  const audio = document.getElementById('bgm');
+  const overlay = document.getElementById('music-overlay');
   let isPlaying = false;
 
-  btn.addEventListener("click", () => {
+  btn.addEventListener('click', function () {
     if (!isPlaying) {
-      music.play().then(() => {
-        btn.textContent = "⏸ Dừng nhạc";
+      audio.play().then(() => {
+        btn.textContent = '⏸ Dừng nhạc';
         isPlaying = true;
       }).catch(err => {
         console.log("Không thể phát nhạc:", err);
       });
     } else {
-      music.pause();
-      music.currentTime = 0;
-      btn.textContent = "▶ Phát nhạc";
+      audio.pause();
+      audio.currentTime = 0;
+      btn.textContent = '▶ Phát nhạc';
       isPlaying = false;
     }
   });
