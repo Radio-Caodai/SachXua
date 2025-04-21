@@ -73,7 +73,7 @@ See https://github.com/adobe-type-tools/cmap-resources
     overflow: hidden;
   }
 
-  /* VÙNG NỀN 3 MÀU */
+  /* KHUNG NHẠC */
   #music-overlay {
     position: fixed;
     top: 10px;
@@ -92,11 +92,12 @@ See https://github.com/adobe-type-tools/cmap-resources
     transition: opacity 0.4s ease;
   }
 
-  /* Hiện rõ khi rê chuột */
+  /* Khi rê chuột vào thì hiện rõ */
   #music-overlay:hover {
     opacity: 1;
   }
 
+  /* Dải nền 3 màu */
   #color-stripe {
     height: 100%;
     width: 100%;
@@ -111,6 +112,7 @@ See https://github.com/adobe-type-tools/cmap-resources
     );
   }
 
+  /* Nút nhấn */
   #play-music-btn {
     position: absolute;
     top: 50%;
@@ -138,7 +140,7 @@ See https://github.com/adobe-type-tools/cmap-resources
 <div id="music-overlay">
   <div id="color-stripe"></div>
   <button id="play-music-btn">▶ Phát nhạc</button>
-  <audio id="background-music" src="nhacnen.mp3" loop></audio>
+  <audio id="background-music" src="assets/nhacnen.mp3" loop></audio>
 </div>
 
 <script>
@@ -146,7 +148,6 @@ See https://github.com/adobe-type-tools/cmap-resources
   const music = document.getElementById("background-music");
   let isPlaying = false;
 
-  // Xử lý sự kiện nút nhấn
   btn.addEventListener("click", () => {
     if (!isPlaying) {
       music.play().then(() => {
