@@ -66,22 +66,30 @@ See https://github.com/adobe-type-tools/cmap-resources
 </head>
 
 <style>
-  #watermark {
+  .corner-watermark {
     position: fixed;
-    bottom: 56px;
-    left: 33%;
-    transform: translateX(-50%);
-    color: #888888; /* màu xám tro */
+    bottom: 60px;
     font-size: 22px;
+    color: #888888;
+    opacity: 0.3;
     font-style: italic;
-    opacity: 0.3; /* mờ nhẹ như watermark */
     z-index: 9998;
-    pointer-events: none; /* không ảnh hưởng khi click chuột */
-    user-select: none; /* không cho bôi chọn */
+    pointer-events: none;
+    user-select: none;
+  }
+
+  #watermark-left {
+    left: 33%;
+  }
+
+  #watermark-right {
+    right: 67%;
   }
 </style>
 
-<div id="watermark">Radio Truyện Sử Cao Đài</div>
+<div id="watermark-left" class="corner-watermark">📻 Radio Truyện Sử Cao Đài</div>
+<div id="watermark-right" class="corner-watermark">📖 Hồi Ký Cơ Chỉnh Đạo</div>
+
 	
 <body>
 
