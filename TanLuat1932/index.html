@@ -65,7 +65,7 @@ See https://github.com/adobe-type-tools/cmap-resources
 	</script>
 </head>
 <body>
-	
+
 <style>
   body {
     margin: 0;
@@ -73,7 +73,6 @@ See https://github.com/adobe-type-tools/cmap-resources
     overflow: hidden;
   }
 
-  /* VÙNG NỀN 3 MÀU */
   #music-overlay {
     position: fixed;
     top: 10px;
@@ -88,11 +87,10 @@ See https://github.com/adobe-type-tools/cmap-resources
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    opacity: 0.3; /* Mặc định mờ */
+    opacity: 0.3;
     transition: opacity 0.4s ease;
   }
 
-  /* Khi rê chuột vào thì hiện rõ */
   #music-overlay:hover {
     opacity: 1;
   }
@@ -102,11 +100,11 @@ See https://github.com/adobe-type-tools/cmap-resources
     width: 100%;
     background: linear-gradient(
       to bottom,
-      #ffd700 0%,        /* Vàng */
+      #ffd700 0%,
       #fff8dc 33.33%,
-      #007BFF 33.34%,    /* Xanh dương */
+      #007BFF 33.34%,
       #007BFF 66.66%,
-      #FF6347 66.67%,    /* Đỏ cam */
+      #FF6347 66.67%,
       #FF6347 100%
     );
   }
@@ -137,27 +135,25 @@ See https://github.com/adobe-type-tools/cmap-resources
 <div id="music-overlay">
   <div id="color-stripe"></div>
   <button id="play-music-btn">▶ Phát nhạc</button>
-  <audio id="background-music" src="nhacnen.mp3" loop></audio>
+  <audio id="background-music" src="assets/nhacnen.mp3" loop></audio>
 </div>
 
-<audio id="bgm" loop>
-  <source src="../assets/nhacnen.mp3" type="audio/mpeg">
-  Trình duyệt của bạn không hỗ trợ audio.
-</audio>
-	
 <script>
   const btn = document.getElementById("play-music-btn");
   const music = document.getElementById("background-music");
   let isPlaying = false;
 
-  // Giảm âm lượng mặc định
   music.volume = 0.5;
 
   btn.addEventListener("click", () => {
     if (!isPlaying) {
-      music.play();
-      btn.textContent = "⏸ Dừng nhạc";
-      isPlaying = true;
+      music.play().then(() => {
+        btn.textContent = "⏸ Dừng nhạc";
+        isPlaying = true;
+      }).catch((err) => {
+        alert("Trình duyệt chặn tự động phát nhạc, hãy tương tác lại.");
+        console.error(err);
+      });
     } else {
       music.pause();
       music.currentTime = 0;
@@ -168,4 +164,5 @@ See https://github.com/adobe-type-tools/cmap-resources
 </script>
 
 </body>
+
 </html>
